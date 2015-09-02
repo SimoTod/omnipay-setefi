@@ -4,6 +4,7 @@ namespace SimoTod\OmnipaySetefi\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Common\Message\RedirectResponseInterface;
 
 class Response extends AbstractResponse implements RedirectResponseInterface
 {
