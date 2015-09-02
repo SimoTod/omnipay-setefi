@@ -25,10 +25,6 @@ And run composer to update your dependencies:
 
 ## Basic Usage
 
-The following gateways are provided by this package:
-
-* Setefi
-
 For general usage instructions, please see the main [Omnipay](https://github.com/omnipay/omnipay)
 repository.
 
@@ -39,7 +35,14 @@ repository.
 	$gateway = Omnipay::create('\SimoTod\OmnipaySetefi\Gateway');
 	
 	$request = $gateway->purchase( 
- 		array(
+ 		array(		
+            'id'                    => '99999999',
+            'password'              => '99999999',
+            'amount'                => '1.00',
+            'responseToMerchantUrl' => 'http://www.merchant.it/notify',
+            'recoveryUrl'           => 'http://www.merchant.it/error',
+            'merchantOrderId'       => 'TRCK0001',
+            'description'           => 'Description'
  		)
 	);
 	
