@@ -5,7 +5,7 @@ namespace SimoTod\OmnipaySetefi\Message;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-class Response extends AbstractResponse
+class Response extends AbstractResponse implements RedirectResponseInterface
 {
     protected $redirectUrl;
 
@@ -14,6 +14,21 @@ class Response extends AbstractResponse
         $this->request      = $request;
         $this->data         = $data;
         $this->redirectUrl  = $redirectUrl;
+    }
+
+    public function getRedirectUrl()
+    {
+        return $this->redirectUrl;
+    }
+
+    public function getRedirectMethod()
+    {
+        return 'GET';
+    }
+
+    public function getRedirectData()
+    {
+        return null;
     }
 
     public function isSuccessful()
@@ -34,21 +49,5 @@ class Response extends AbstractResponse
     public function getMessage()
     {
         return isset($this->data['message']) ? $this->data['message'] : null;
-    }
-
-
-    public function getRedirectUrl()
-    {
-        return $this->redirectUrl;
-    }
-
-    public function getRedirectMethod()
-    {
-        return 'GET';
-    }
-
-    public function getRedirectData()
-    {
-        return null;
     }
 }
