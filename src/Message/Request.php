@@ -11,7 +11,9 @@ class Request extends AbstractRequest
 
     public function getData()
     {
-        $this->validate('id', 'password', 'operationType', 'amount', 'currencycode', 'language', 'merchantOrderId');
+        if(!$this->getTestMode()) {
+            $this->validate('id', 'password', 'amount', 'merchantOrderId');
+        }
 
         return $this->getParameters();
     }
