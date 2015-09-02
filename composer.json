@@ -1,0 +1,32 @@
+{
+    "name": "simotod/omnipay-setefi",
+    "type": "library",
+    "description": "Setefi driver for the Omnipay payment processing library",
+    "keywords": [
+        "setefi",
+        "moneta online",
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simone Todaro",
+            "email": "simo.todaro@gmail.com",
+            "homepage": "https://github.com/SimoTod",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Simotod\\OmnipaySetefi\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    }
+}
