@@ -21,7 +21,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Simotod\\OmnipaySetefi\\" : "src/" }
+        "psr-4": { "SimoTod\\OmnipaySetefi\\" : "src/" }
     },
     "require": {
         "omnipay/common": "~2.0"
