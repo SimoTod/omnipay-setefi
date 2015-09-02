@@ -47,8 +47,7 @@ class Gateway extends AbstractGateway
 
     public function purchase(array $parameters = array())
     {
-        $merged_parameters = array_merge($this->getDefaultParameters(), $this->merged_parameters);
-        $merged_parameters = array_merge($merged_parameters, $parameters);
+        $merged_parameters = array_merge($this->getDefaultParameters(), $parameters);
         return $this->authorize($merged_parameters);
     }
 }
