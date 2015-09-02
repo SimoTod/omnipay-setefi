@@ -11,7 +11,7 @@ class Request extends AbstractRequest
 
     public function getData()
     {
-        if(!$this->getTestMode()) {
+        if (!$this->getTestMode()) {
             $this->validate('id', 'password', 'amount', 'merchantOrderId');
         }
 
@@ -38,7 +38,7 @@ class Request extends AbstractRequest
                 ->setPostField('description', $this->getParameter('description'));
             $tokenResponse = $tokenRequest->send();
 
-            $xml = simplexml_load_string($response->getBody()->__toString());
+            $xml = simplexml_load_string($tokenResponse->getBody()->__toString());
 
             $newData["reference"] = $xml->securitytoken;
             $newData["success"] = true;
