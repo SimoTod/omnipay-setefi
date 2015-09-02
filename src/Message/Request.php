@@ -41,12 +41,10 @@ class Request extends AbstractRequest
             $xml = simplexml_load_string($tokenResponse->getBody()->__toString());
 
             $newData["reference"] = $xml->securitytoken;
-            $newData["success"] = true;
-            $redirectUrl = ($xml->hostedpageurl).'?paymentId='.($xml->paymentid);
             $data['message'] = "Success";
+            $redirectUrl = ($xml->hostedpageurl).'?paymentId='.($xml->paymentid);
         } catch (Exception $e) {
             $newData["reference"] = null;
-            $newData["success"] = false;
             $data['message'] = "Failure: ".$e->getMessage();
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Dummy\Message;
+namespace SimoTod\OmnipaySetefi\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 
@@ -17,12 +17,12 @@ class Response extends AbstractResponse
 
     public function isSuccessful()
     {
-        return isset($this->data['success']) && $this->data['success'];
+        return false;
     }
 
     public function isRedirect()
     {
-        return $this->isSuccessful();
+        return !empty($this->redirectUrl);
     }
 
     public function getTransactionReference()
