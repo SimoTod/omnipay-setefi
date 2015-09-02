@@ -9,14 +9,30 @@ class Request extends AbstractRequest
     protected $testEndpoint = 'https://test.monetaonline.it/monetaweb/payment/2/xml';
     protected $liveEndpoint = 'https://www.monetaonline.it/monetaweb/payment/2/xml';
 
+    const OP_TYPE_INIT = 'initialize';
+
     public function getData()
     {
-        if (!$this->getTestMode()) {
-            $this->validate('id', 'password', 'amount', 'merchantOrderId');
-        }
+        $this->validate('id', 'password', 'amount', 'merchantOrderId');
 
         return $this->getParameters();
     }
+
+    public function setId($id)
+    {
+        return $this->setParameter('id', $id);
+    }
+
+    public function setPassword($password)
+    {
+        return $this->setParameter('password', $password);
+    }
+
+    public function setLanguage($language)
+    {
+        return $this->setParameter('language', $language);
+    }
+
 
     public function sendData($data)
     {
@@ -28,21 +44,29 @@ class Request extends AbstractRequest
                 ->post($this->getEndpoint())
                 ->setPostField('id', $this->getParameter('id'))
                 ->setPostField('password', $this->getParameter('password'))
-                ->setPostField('operationType', $this->getParameter('operationType'))
+                ->setPostField('operationType', self::OP_TYPE_INIT)
                 ->setPostField('amount', $this->getParameter('amount'))
-                ->setPostField('currencycode', $this->getParameter('currencycode'))
+                ->setPostField('currencycode', $this->getParameter('currency'))
                 ->setPostField('language', $this->getParameter('language'))
-                ->setPostField('responseToMerchantUrl', $this->getParameter('responseToMerchantUrl'))
-                ->setPostField('recoveryUrl', $this->getParameter('recoveryUrl'))
-                ->setPostField('merchantOrderId', $this->getParameter('merchantOrderId'))
+                ->setPostField('responseToMerchantUrl', $this->getParameter('returnUrl'))
+                ->setPostField('recoveryUrl', $this->getParameter('cancelUrl'))
+                ->setPostField('merchantOrderId', $this->getParameter('transactionId'))
                 ->setPostField('description', $this->getParameter('description'));
             $tokenResponse = $tokenRequest->send();
 
             $xml = simplexml_load_string($tokenResponse->getBody()->__toString());
 
-            $newData["reference"] = $xml->securitytoken;
-            $data['message'] = "Success";
-            $redirectUrl = ($xml->hostedpageurl).'?paymentId='.($xml->paymentid);
+            echo '<br><br>';
+            var_dump($xml);
+
+            if ($xml->errorcode) {
+                $newData["reference"] = null;
+                $data['message'] = "Failure: ".$xml->errormessage;
+            } else {
+                $newData["reference"] = $xml->securitytoken;
+                $data['message'] = "Success";
+                $redirectUrl = ($xml->hostedpageurl).'?paymentId='.($xml->paymentid);
+            }
         } catch (Exception $e) {
             $newData["reference"] = null;
             $data['message'] = "Failure: ".$e->getMessage();

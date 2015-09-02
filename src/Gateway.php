@@ -7,8 +7,6 @@ use SimoTod\OmnipaySetefi\Message\Request;
 
 class Gateway extends AbstractGateway
 {
-    const OP_TYPE_INIT = 'initialize';
-
     const CURRENCY_EURO = '978';
     const CURRENCY_US_DOLLAR = '998';
     const CURRENCY_UK_POUND = '826';
@@ -29,13 +27,12 @@ class Gateway extends AbstractGateway
         return array(
             'id'                    => '99999999',
             'password'              => '99999999',
-            'operationType'         => self::OP_TYPE_INIT,
             'amount'                => '1.00',
-            'currencycode'          => self::CURRENCY_EURO,
+            'currency'              => self::CURRENCY_EURO,
             'language'              => self::LANG_ITA,
-            'responseToMerchantUrl' => 'http://www.merchant.it/notify',
-            'recoveryUrl'           => 'http://www.merchant.it/error',
-            'merchantOrderId'       => 'TRCK0001',
+            'returnUrl'             => 'http://www.merchant.it/notify',
+            'cancelUrl'             => null,
+            'transactionId'         => 'TRCK0001',
             'description'           => 'Description'
         );
     }
@@ -48,6 +45,7 @@ class Gateway extends AbstractGateway
     public function purchase(array $parameters = array())
     {
         $merged_parameters = array_merge($this->getDefaultParameters(), $parameters);
+        var_dump($merged_parameters);
         return $this->authorize($merged_parameters);
     }
 }

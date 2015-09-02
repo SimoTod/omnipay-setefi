@@ -39,10 +39,11 @@ repository.
             'id'                    => '99999999',
             'password'              => '99999999',
             'amount'                => '1.00',
-            'responseToMerchantUrl' => 'http://www.merchant.it/notify',
-            'recoveryUrl'           => 'http://www.merchant.it/error',
-            'merchantOrderId'       => 'TRCK0001',
+            'returnUrl'             => 'http://www.merchant.it/notify',
+            'cancelUrl'             => 'http://www.merchant.it/error',
+            'transactionId'         => 'TRCK0001',
             'description'           => 'Description'
+            'language'              => \SimoTod\OmnipaySetefi\Gateway::LANG_ITA
  		)
 	);
 	
