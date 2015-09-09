@@ -56,9 +56,6 @@ class Request extends AbstractRequest
 
             $xml = simplexml_load_string($tokenResponse->getBody()->__toString());
 
-            echo '<br><br>';
-            var_dump($xml);
-
             if ($xml->errorcode) {
                 $newData["reference"] = null;
                 $data['message'] = "Failure: ".$xml->errormessage;
