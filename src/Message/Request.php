@@ -58,11 +58,14 @@ class Request extends AbstractRequest
 
             if ($xml->errorcode) {
                 $newData["reference"] = null;
-                $data['message'] = "Failure: ".$xml->errormessage;
+                $data['message'] = "Failure: ".$xml->errormessage->__toString();
             } else {
-                $newData["reference"] = $xml->securitytoken;
+                $newData["reference"] = [
+                    'securitytoken' => $xml->securitytoken->__toString(),
+                    'paymentid'     => $xml->paymentid->__toString(),
+                ];
                 $data['message'] = "Success";
-                $redirectUrl = ($xml->hostedpageurl).'?paymentId='.($xml->paymentid);
+                $redirectUrl = ($xml->hostedpageurl->__toString()).'?paymentId='.($xml->paymentid->__toString());
             }
         } catch (Exception $e) {
             $newData["reference"] = null;
