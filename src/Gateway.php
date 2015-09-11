@@ -39,12 +39,18 @@ class Gateway extends AbstractGateway
 
     public function authorize(array $parameters = array())
     {
+        $base = array(
+            'currency'              => self::CURRENCY_EURO,
+            'language'              => self::LANG_ITA,
+            'returnUrl'             => 'http://www.merchant.it/notify',
+            'cancelUrl'             => null
+        );
+        $merged_parameters = array_merge($base, $parameters);
         return $this->createRequest('\SimoTod\OmnipaySetefi\Message\Request', $parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        $merged_parameters = array_merge($this->getDefaultParameters(), $parameters);
         return $this->authorize($merged_parameters);
     }
 }

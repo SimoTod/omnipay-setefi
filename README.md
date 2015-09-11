@@ -33,9 +33,9 @@ repository.
 ```php
 
 	$gateway = Omnipay::create('\SimoTod\OmnipaySetefi\Gateway');
-	
-	$request = $gateway->purchase( 
- 		array(		
+
+	$request = $gateway->purchase(
+ 		array(
             'id'                    => '99999999',
             'password'              => '99999999',
             'amount'                => '1.00',
@@ -46,14 +46,14 @@ repository.
             'language'              => \SimoTod\OmnipaySetefi\Gateway::LANG_ITA
  		)
 	);
-	
+
 	//Set test mode. Remove this row or set to false in production.
 	$request->setTestMode(true);
-	
+
 	$response = $request->send();
 
 	if ($response->isRedirect()) {
-		// (optional) save the $response->getTransactionReference() token.  
+		// (optional) save the $response->getTransactionReference() token.
         // redirect to offsite payment Setefi
         $response->redirect();
     } else {
@@ -62,7 +62,7 @@ repository.
     }
 
 ```
-        
+
 ## Support
 
 If you are having general issues with Omnipay, we suggest posting on
