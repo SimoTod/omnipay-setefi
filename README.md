@@ -13,7 +13,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "simotod/omnipay-setefi": "dev-master"
+        "simotod/omnipay-setefi": "~1.0"
     }
 }
 ```
