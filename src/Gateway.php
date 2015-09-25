@@ -46,11 +46,11 @@ class Gateway extends AbstractGateway
             'cancelUrl'             => null
         );
         $merged_parameters = array_merge($base, $parameters);
-        return $this->createRequest('\SimoTod\OmnipaySetefi\Message\Request', $parameters);
+        return $this->createRequest('\SimoTod\OmnipaySetefi\Message\Request', $merged_parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        return $this->authorize($merged_parameters);
+        return $this->authorize($parameters);
     }
 }
