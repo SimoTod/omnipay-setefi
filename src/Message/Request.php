@@ -68,7 +68,7 @@ class Request extends AbstractRequest
             }
         } catch (Exception $e) {
             $newData["reference"] = null;
-            $data['message'] = "Failure: ".$e->getMessage();
+            $newData['message'] = "Failure: ".$e->getMessage();
         }
 
         return $this->response = new Response($this, $newData, $redirectUrl);
